@@ -30,6 +30,7 @@ window.PORTFOLIO_CONFIG = {
   featuredProjects: [
     {
       repo: "open-health-risk-engine",
+      spotlight: true,
       category: "Explainable Machine Learning",
       title: "Open Health Risk Engine",
       language: "Python",
@@ -37,6 +38,12 @@ window.PORTFOLIO_CONFIG = {
         "An end-to-end mental health risk demo built from NHANES survey data and designed to feel like a serious applied machine learning case study.",
       detail:
         "The project combines a reproducible data pipeline, model comparison, SHAP-based explanation, automated tests, and an interactive Streamlit interface. It is the kind of work I enjoy most: using public data to build something analytical, interpretable, and deployment-ready.",
+      callout:
+        "The live link below opens the direct calculator experience, not just the project wrapper, so visitors land straight in the app.",
+      imageUrl:
+        "https://raw.githubusercontent.com/andyombogo/open-health-risk-engine/main/figures/app_walkthrough.png",
+      imageAlt:
+        "Open Health Risk Engine calculator walkthrough",
       tags: ["NHANES", "Streamlit", "SHAP", "XGBoost", "Healthcare"],
       links: [
         {
@@ -44,8 +51,9 @@ window.PORTFOLIO_CONFIG = {
           href: "https://github.com/andyombogo/open-health-risk-engine"
         },
         {
-          label: "Live demo",
-          href: "https://andyombogo-open-health-risk-engine.hf.space"
+          label: "Open calculator",
+          href: "https://andyombogo-open-health-risk-engine.hf.space/?embed=true&__theme=light&v=20260319-4",
+          primary: true
         }
       ]
     },
@@ -120,8 +128,8 @@ window.PORTFOLIO_CONFIG = {
       description:
         "Explainable mental health risk demo using NHANES, Streamlit, SHAP, and machine learning.",
       language: "Python",
-      homepage: "https://andyombogo-open-health-risk-engine.hf.space",
-      homepageLabel: "Live demo",
+      homepage: "https://andyombogo-open-health-risk-engine.hf.space/?embed=true&__theme=light&v=20260319-4",
+      homepageLabel: "Calculator",
       stargazers_count: 0,
       updated_at: "2026-03-21T16:09:16Z",
       topics: ["data-science", "machine-learning", "mental-health", "streamlit", "shap"]

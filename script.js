@@ -67,7 +67,9 @@ function renderFeaturedProjects(config) {
 
   config.featuredProjects.forEach((project) => {
     const article = document.createElement("article");
-    article.className = "case-study";
+    article.className = project.spotlight
+      ? "case-study case-study-spotlight"
+      : "case-study";
 
     const metaChips = [
       project.category,
@@ -82,17 +84,44 @@ function renderFeaturedProjects(config) {
       .join("");
 
     const linkMarkup = (project.links || [])
-      .map((link) => `<a class="case-link" href="${escapeHtml(link.href)}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`)
+      .map((link) => {
+        const classes = link.primary ? "case-link case-link-primary" : "case-link";
+        return `<a class="${classes}" href="${escapeHtml(link.href)}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`;
+      })
       .join("");
 
-    article.innerHTML = `
+    const imageMarkup = project.imageUrl
+      ? `
+        <figure class="case-study-visual">
+          <img src="${escapeHtml(project.imageUrl)}" alt="${escapeHtml(project.imageAlt || project.title)}">
+        </figure>
+      `
+      : "";
+
+    const calloutMarkup = project.callout
+      ? `<p class="case-study-callout">${escapeHtml(project.callout)}</p>`
+      : "";
+
+    const bodyMarkup = `
       <div class="case-study-meta">${metaChips}</div>
       <h3>${escapeHtml(project.title)}</h3>
       <p class="case-study-summary">${escapeHtml(project.summary)}</p>
       <p class="case-study-detail">${escapeHtml(project.detail)}</p>
+      ${calloutMarkup}
       <div class="case-study-meta">${tagMarkup}</div>
       <div class="case-study-links">${linkMarkup}</div>
     `;
+
+    article.innerHTML = project.spotlight
+      ? `
+        <div class="case-study-spotlight-grid">
+          <div class="case-study-body">
+            ${bodyMarkup}
+          </div>
+          ${imageMarkup}
+        </div>
+      `
+      : bodyMarkup;
 
     container.appendChild(article);
   });
