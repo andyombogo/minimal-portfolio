@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet"
   >
   <link rel="stylesheet" href="styles.css">
@@ -19,90 +19,94 @@
   <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="page-shell">
-    <header class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">Portfolio</p>
-        <h1 id="profile-name">John Andrew</h1>
-        <p class="hero-title" id="profile-title">Data Scientist</p>
-        <p class="hero-bio" id="profile-bio">
-          I build practical data products and analytical tools that turn complex datasets into clear, useful decisions.
-        </p>
-        <p class="hero-intro" id="profile-intro">
-          This page is a lightweight home for selected work from my GitHub, with a focus on applied data science,
-          dashboards, and public health analytics.
-        </p>
+  <div class="wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="identity-block">
+          <p class="section-label">Portfolio</p>
+          <h1 id="profile-name">John Andrew</h1>
+          <p class="profile-role" id="profile-title">Data Scientist</p>
+        </div>
 
-        <div class="hero-actions" id="hero-links"></div>
-
-        <dl class="hero-meta">
-          <div>
-            <dt>Base</dt>
-            <dd id="profile-location">Nairobi</dd>
-          </div>
-          <div>
-            <dt>Public Repos</dt>
-            <dd id="profile-repo-count">7</dd>
-          </div>
-          <div>
-            <dt>Focus</dt>
-            <dd id="profile-focus">Data science and analytics</dd>
-          </div>
-        </dl>
-      </div>
-
-      <aside class="profile-panel">
         <img
           id="profile-avatar"
           class="profile-avatar"
           src=""
           alt="Profile portrait"
         >
-        <div class="profile-panel-copy">
-          <p class="panel-label">Currently exploring</p>
-          <p class="panel-text" id="profile-highlight">
-            Applied machine learning, interactive dashboards, and health-focused analysis.
-          </p>
-        </div>
-      </aside>
-    </header>
 
-    <main>
-      <section class="section">
-        <div class="section-head">
-          <p class="eyebrow">Selected Work</p>
-          <h2>Featured projects</h2>
-          <p id="featured-summary">
-            A few recent projects that represent the kind of work I enjoy building most.
+        <div class="contact-block">
+          <p class="contact-line" id="profile-location">Nairobi, Kenya</p>
+          <div class="contact-links" id="hero-links"></div>
+        </div>
+
+        <div class="sidebar-copy">
+          <p class="profile-bio" id="profile-bio">
+            I build practical data products and analytical tools that turn complex datasets into clear, useful decisions.
+          </p>
+          <p class="profile-intro" id="profile-intro">
+            This page is a lightweight home for selected work from my GitHub, with a focus on applied data science,
+            dashboards, and public health analytics.
           </p>
         </div>
-        <div class="project-grid" id="featured-projects"></div>
+
+        <dl class="sidebar-meta">
+          <div>
+            <dt>Focus</dt>
+            <dd id="profile-focus">Data science and analytics</dd>
+          </div>
+          <div>
+            <dt>Public repos</dt>
+            <dd id="profile-repo-count">7</dd>
+          </div>
+          <div>
+            <dt>Current theme</dt>
+            <dd id="profile-highlight">Applied machine learning, interactive dashboards, and health-focused analysis.</dd>
+          </div>
+        </dl>
+
+        <a
+          class="sidebar-github"
+          id="footer-github-link"
+          href="https://github.com/andyombogo"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View full GitHub profile
+        </a>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="intro-section">
+        <p class="section-label">Selected Work</p>
+        <h2>Projects that show how I like to build.</h2>
+        <p class="lead" id="featured-summary">
+          A few recent projects that already show a strong mix of deployment, storytelling, and practical analytics.
+        </p>
       </section>
 
-      <section class="section">
-        <div class="section-head">
-          <p class="eyebrow">GitHub</p>
-          <h2>Public repositories</h2>
-          <p id="repo-feed-summary">
-            A live feed of additional public repositories, loaded directly from GitHub.
-          </p>
-        </div>
-        <div class="repo-grid" id="repo-feed">
-          <article class="repo-card repo-card-loading">
+      <section class="featured-list" id="featured-projects"></section>
+
+      <section class="repo-section">
+        <p class="section-label">GitHub</p>
+        <h2>Public repositories</h2>
+        <p class="lead repo-lead" id="repo-feed-summary">
+          The full set of your current public repositories, with a live refresh from GitHub when the page loads.
+        </p>
+        <div class="repo-list" id="repo-feed">
+          <article class="repo-item repo-item-loading">
             <p>Loading repositories...</p>
           </article>
         </div>
       </section>
-    </main>
 
-    <footer class="footer">
-      <p id="footer-note">
-        If a project catches your eye, the code and any live links are one click away.
-      </p>
-      <a class="footer-link" id="footer-github-link" href="https://github.com/andyombogo" target="_blank" rel="noreferrer">
-        View full GitHub profile
-      </a>
-    </footer>
+      <footer class="page-footer">
+        <p id="footer-note">
+          If a project catches your eye, the code and any live links are one click away.
+        </p>
+      </footer>
+    </main>
   </div>
 </body>
 </html>

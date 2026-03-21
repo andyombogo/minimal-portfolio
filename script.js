@@ -66,72 +66,77 @@ function renderFeaturedProjects(config) {
   container.innerHTML = "";
 
   config.featuredProjects.forEach((project) => {
-    const card = document.createElement("article");
-    card.className = "project-card";
+    const article = document.createElement("article");
+    article.className = "case-study";
 
-    const tags = (project.tags || [])
-      .map((tag) => `<li class="tag">${tag}</li>`)
+    const metaChips = [
+      project.category,
+      project.language
+    ]
+      .filter(Boolean)
+      .map((value) => `<span class="meta-chip">${escapeHtml(value)}</span>`)
       .join("");
 
-    const liveLink = project.liveUrl
-      ? `<a class="project-link" href="${project.liveUrl}" target="_blank" rel="noreferrer">${project.liveLabel || "Live Project"}</a>`
-      : "";
+    const tagMarkup = (project.tags || [])
+      .map((tag) => `<span class="meta-chip">${escapeHtml(tag)}</span>`)
+      .join("");
 
-    card.innerHTML = `
-      <div class="card-topline">
-        <span class="card-kicker">Featured</span>
-        <span class="card-language">${project.language || "Project"}</span>
-      </div>
-      <h3>${project.title}</h3>
-      <p class="project-text">${project.description}</p>
-      <ul class="tag-list">${tags}</ul>
-      <div class="link-row">
-        <a class="project-link" href="${project.repoUrl}" target="_blank" rel="noreferrer">View Code</a>
-        ${liveLink}
-      </div>
+    const linkMarkup = (project.links || [])
+      .map((link) => `<a class="case-link" href="${escapeHtml(link.href)}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`)
+      .join("");
+
+    article.innerHTML = `
+      <div class="case-study-meta">${metaChips}</div>
+      <h3>${escapeHtml(project.title)}</h3>
+      <p class="case-study-summary">${escapeHtml(project.summary)}</p>
+      <p class="case-study-detail">${escapeHtml(project.detail)}</p>
+      <div class="case-study-meta">${tagMarkup}</div>
+      <div class="case-study-links">${linkMarkup}</div>
     `;
 
-    container.appendChild(card);
+    container.appendChild(article);
   });
 }
 
-function renderRepoCard(repo) {
-  const card = document.createElement("article");
-  card.className = "repo-card";
+function renderRepoItem(repo) {
+  const item = document.createElement("article");
+  item.className = "repo-item";
 
-  const language = escapeHtml(repo.language || "Repository");
-  const description = escapeHtml(repo.description || "Public project on GitHub.");
   const name = escapeHtml(repo.name);
+  const description = escapeHtml(repo.description || "Public project on GitHub.");
+  const language = escapeHtml(repo.language || "Repository");
   const htmlUrl = escapeHtml(repo.html_url);
-  const stars = repo.stargazers_count || 0;
   const homepage = repo.homepage || "";
+  const homepageLabel = repo.homepageLabel || "Website";
+  const stars = repo.stargazers_count || 0;
   const topics = normalizeTopics(repo.topics).slice(0, 4);
-  const topicMarkup = topics.length
-    ? `<ul class="tag-list">${topics.map((topic) => `<li class="tag">${escapeHtml(topic)}</li>`).join("")}</ul>`
-    : "";
-  const liveLink = homepage
-    ? `<a class="repo-link" href="${escapeHtml(homepage)}" target="_blank" rel="noreferrer">Live Link</a>`
+
+  const tagMarkup = topics.length
+    ? `<div class="repo-tags">${topics.map((topic) => `<span class="repo-tag">${escapeHtml(topic)}</span>`).join("")}</div>`
     : "";
 
-  card.innerHTML = `
-    <div class="card-topline">
-      <span class="card-kicker">Repository</span>
-      <span class="card-language">${language}</span>
+  const extraLink = homepage
+    ? `<a class="repo-link" href="${escapeHtml(homepage)}" target="_blank" rel="noreferrer">${escapeHtml(homepageLabel)}</a>`
+    : "";
+
+  item.innerHTML = `
+    <div class="repo-item-head">
+      <h3><a href="${htmlUrl}" target="_blank" rel="noreferrer">${name}</a></h3>
+      <span class="repo-language">${language}</span>
     </div>
-    <h3>${name}</h3>
     <p class="repo-text">${description}</p>
-    ${topicMarkup}
+    ${tagMarkup}
     <div class="repo-meta">
       <span>Updated ${formatMonthYear(repo.updated_at)}</span>
       <span>${stars} stars</span>
     </div>
-    <div class="link-row">
+    <div class="repo-links">
       <a class="repo-link" href="${htmlUrl}" target="_blank" rel="noreferrer">Repository</a>
-      ${liveLink}
+      ${extraLink}
     </div>
   `;
 
-  return card;
+  return item;
 }
 
 function renderRepoList(container, repos) {
@@ -139,7 +144,7 @@ function renderRepoList(container, repos) {
 
   if (!repos.length) {
     container.innerHTML = `
-      <article class="repo-card repo-card-empty">
+      <article class="repo-item repo-item-empty">
         <p>No public repositories to show yet.</p>
       </article>
     `;
@@ -147,7 +152,7 @@ function renderRepoList(container, repos) {
   }
 
   repos.forEach((repo) => {
-    container.appendChild(renderRepoCard(repo));
+    container.appendChild(renderRepoItem(repo));
   });
 }
 
@@ -184,6 +189,7 @@ async function loadRepoFeed(config) {
           ...repo,
           description: repo.description || fallback.description || "",
           homepage: repo.homepage || fallback.homepage || "",
+          homepageLabel: fallback.homepageLabel || "Website",
           language: repo.language || fallback.language || "",
           topics: repo.topics || fallback.topics || []
         };
@@ -229,9 +235,9 @@ function bootstrapPortfolio() {
   const heroLinks = document.getElementById("hero-links");
   if (heroLinks) {
     heroLinks.innerHTML = "";
-    heroLinks.appendChild(makeLink("GitHub", config.profile.githubUrl, "button-link primary"));
-    heroLinks.appendChild(makeLink("LinkedIn", config.profile.linkedinUrl, "button-link secondary"));
-    heroLinks.appendChild(makeLink("Email", `mailto:${config.profile.email}`, "button-link secondary"));
+    heroLinks.appendChild(makeLink("GitHub", config.profile.githubUrl, "contact-link"));
+    heroLinks.appendChild(makeLink("LinkedIn", config.profile.linkedinUrl, "contact-link"));
+    heroLinks.appendChild(makeLink("Email", `mailto:${config.profile.email}`, "contact-link"));
   }
 
   const footerLink = document.getElementById("footer-github-link");
