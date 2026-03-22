@@ -27,7 +27,7 @@ window.PORTFOLIO_CONFIG = {
   featuredSummary:
     "A small selection of projects that best represent how I approach applied data work: practical problems, interpretable outputs, and polished delivery.",
   repoFeedSummary:
-    "A complete index of the public repositories currently visible on GitHub, excluding this portfolio repo itself, with a live refresh on page load.",
+    "A complete index of the public repositories currently visible on GitHub, excluding the older portfolio mirror and the lightweight profile README repo, with a live refresh on page load.",
   featuredProjects: [
     {
       repo: "open-health-risk-engine",
@@ -112,6 +112,18 @@ window.PORTFOLIO_CONFIG = {
   ],
   publicRepos: [
     {
+      name: "andyombogo.github.io",
+      html_url: "https://github.com/andyombogo/andyombogo.github.io",
+      description:
+        "Main public portfolio site for John Andrew, published with GitHub Pages.",
+      language: "HTML",
+      homepage: "https://andyombogo.github.io/",
+      homepageLabel: "Live site",
+      stargazers_count: 0,
+      updated_at: "2026-03-22T09:30:00Z",
+      topics: ["portfolio", "github-pages", "personal-site"]
+    },
+    {
       name: "vaccination-coverage-analysis-usa",
       html_url: "https://github.com/andyombogo/vaccination-coverage-analysis-usa",
       description:
@@ -180,21 +192,10 @@ window.PORTFOLIO_CONFIG = {
       updated_at: "2024-10-23T14:57:15Z",
       topics: ["design", "guidelines"]
     },
-    {
-      name: "andyombogo",
-      html_url: "https://github.com/andyombogo/andyombogo",
-      description: "Config files and content for your GitHub profile README.",
-      language: "",
-      homepage: "https://github.com/andyombogo",
-      homepageLabel: "Profile",
-      stargazers_count: 1,
-      updated_at: "2024-10-16T19:13:21Z",
-      topics: ["github-profile", "config"]
-    }
   ],
   repoFeed: {
     username: "andyombogo",
     limit: 20,
-    exclude: ["minimal-portfolio"]
+    exclude: ["minimal-portfolio", "andyombogo"]
   }
 };
