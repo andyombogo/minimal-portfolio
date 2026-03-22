@@ -208,8 +208,10 @@ async function loadRepoFeed(config) {
     }
 
     const repos = await response.json();
+    const excludedRepos = new Set(config.repoFeed.exclude || []);
     const visibleRepos = repos
       .filter((repo) => !repo.fork)
+      .filter((repo) => !excludedRepos.has(repo.name))
       .slice(0, config.repoFeed.limit)
       .map((repo) => {
         const fallback = configuredByName.get(repo.name) || {};

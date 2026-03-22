@@ -193,6 +193,7 @@ window.PORTFOLIO_CONFIG = {
   ],
   repoFeed: {
     username: "andyombogo",
-    limit: 20
+    limit: 20,
+    exclude: ["minimal-portfolio"]
   }
 };
