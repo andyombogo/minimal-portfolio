@@ -9,6 +9,7 @@ window.PORTFOLIO_CONFIG = {
     title: "Data Scientist",
     focus: "Public health analytics, explainable ML, and dashboards",
     location: "Nairobi, Kenya",
+    siteStatus: "Public GitHub Pages site",
     bio:
       "I build practical data science work that goes beyond notebooks, from data cleaning and modeling to documentation, deployment, and interfaces people can actually use.",
     intro:
@@ -26,7 +27,7 @@ window.PORTFOLIO_CONFIG = {
   featuredSummary:
     "A small selection of projects that best represent how I approach applied data work: practical problems, interpretable outputs, and polished delivery.",
   repoFeedSummary:
-    "A complete index of the public repositories currently visible on GitHub, with a live refresh on page load.",
+    "A complete index of the public repositories currently visible on GitHub, excluding this portfolio repo itself, with a live refresh on page load.",
   featuredProjects: [
     {
       repo: "open-health-risk-engine",

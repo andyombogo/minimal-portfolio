@@ -26,6 +26,7 @@
           <p class="section-label">Portfolio</p>
           <h1 id="profile-name">John Andrew</h1>
           <p class="profile-role" id="profile-title">Data Scientist</p>
+          <p class="status-pill" id="site-status">Public site live</p>
         </div>
 
         <img
@@ -78,17 +79,27 @@
     </aside>
 
     <main class="content">
-      <section class="intro-section">
+      <section class="intro-section" id="top">
+        <nav class="quick-nav">
+          <a href="#selected-work">Selected Work</a>
+          <a href="#public-repos">Public Repos</a>
+          <a href="#contact-links">Contact</a>
+        </nav>
         <p class="section-label">Selected Work</p>
         <h2>Projects that show how I like to build.</h2>
         <p class="lead" id="featured-summary">
           A few recent projects that already show a strong mix of deployment, storytelling, and practical analytics.
         </p>
+        <div class="intro-actions" id="intro-actions"></div>
+        <div class="fact-strip" id="fact-strip"></div>
       </section>
 
-      <section class="featured-list" id="featured-projects"></section>
+      <section class="featured-list" id="featured-projects-section">
+        <div id="selected-work"></div>
+        <div id="featured-projects"></div>
+      </section>
 
-      <section class="repo-section">
+      <section class="repo-section" id="public-repos">
         <p class="section-label">GitHub</p>
         <h2>Public repositories</h2>
         <p class="lead repo-lead" id="repo-feed-summary">

@@ -26,6 +26,14 @@ function setText(id, value) {
   }
 }
 
+function makeAnchorLink(label, href, className) {
+  const link = document.createElement("a");
+  link.className = className;
+  link.href = href;
+  link.textContent = label;
+  return link;
+}
+
 function normalizeTopics(topics) {
   if (!topics) {
     return [];
@@ -253,6 +261,7 @@ function bootstrapPortfolio() {
   setText("profile-repo-count", String(config.profile.repoCount));
   setText("profile-focus", config.profile.focus);
   setText("profile-highlight", config.profile.highlight);
+  setText("site-status", config.profile.siteStatus);
   setText("featured-summary", config.featuredSummary);
   setText("repo-feed-summary", config.repoFeedSummary);
   setText("footer-note", config.profile.footerNote);
@@ -269,6 +278,41 @@ function bootstrapPortfolio() {
     heroLinks.appendChild(makeLink("GitHub", config.profile.githubUrl, "contact-link"));
     heroLinks.appendChild(makeLink("LinkedIn", config.profile.linkedinUrl, "contact-link"));
     heroLinks.appendChild(makeLink("Email", `mailto:${config.profile.email}`, "contact-link"));
+  }
+
+  const introActions = document.getElementById("intro-actions");
+  if (introActions) {
+    introActions.innerHTML = "";
+    introActions.appendChild(makeLink("View GitHub", config.profile.githubUrl, "intro-action intro-action-primary"));
+
+    const spotlightProject = (config.featuredProjects || []).find((project) => project.spotlight);
+    const primarySpotlightLink = spotlightProject && (spotlightProject.links || []).find((link) => link.primary);
+    if (primarySpotlightLink) {
+      introActions.appendChild(
+        makeLink(primarySpotlightLink.label, primarySpotlightLink.href, "intro-action intro-action-secondary")
+      );
+    }
+
+    introActions.appendChild(makeAnchorLink("Browse Repositories", "#public-repos", "intro-action intro-action-ghost"));
+  }
+
+  const factStrip = document.getElementById("fact-strip");
+  if (factStrip) {
+    factStrip.innerHTML = "";
+
+    [
+      { label: "Public site", value: "Live now" },
+      { label: "Visible repos", value: String(config.profile.repoCount) },
+      { label: "Featured focus", value: "Health + ML" }
+    ].forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "fact-card";
+      card.innerHTML = `
+        <span class="fact-label">${escapeHtml(item.label)}</span>
+        <strong class="fact-value">${escapeHtml(item.value)}</strong>
+      `;
+      factStrip.appendChild(card);
+    });
   }
 
   const footerLink = document.getElementById("footer-github-link");
